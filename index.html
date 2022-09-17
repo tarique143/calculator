@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font-awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <!-- font-family cdn link -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,500&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap">
+    <title>Calculator</title>
+    <style>
+        *{
+            user-select: none;
+            font-family:Poppins, sans-serif;
+            font-weight:600;
+        }
+        body{
+            margin:0;
+            background: black;
+        }
+        .calculator-container{
+            height:100%;
+            width:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .calculator{
+            margin: 10px 0;
+            box-sizing:border-box;
+            padding:10px 15px 10px 10px;
+            width:400px;
+            background:rgb(233, 230, 230);
+            border-radius:5px;
+            border:2px solid grey;
+            box-sizing:border-box;
+            display:flex;
+            flex-direction:column;
+            justify-content:stretch;
+            align-items:stretch;
+        }
+        .calculator .output input{
+            color:white;
+            font-size:25px;
+            background:rgba(0,0,0,0.5);
+            user-select:none;
+            height:120px;
+            width:100%;
+            margin:10px 0;
+            text-align:right;
+            pointer-events:none;
+        }
+        .calculator .row-container{
+            display:flex;
+            flex-direction:column;
+        }
+        .calculator .row{
+            display:flex;
+            flex-direction:row;
+            width:100%;
+            align-items:center;
+            justify-content:center;
+        }
+        .calculator .row .cell{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            border:1px solid grey;
+            width:calc(100%/3);
+            text-align:center;
+            font-size:25px;
+            cursor:pointer;
+            height:50px;
+            border-radius:5px;
+            margin:5px 7px;
+            transition:all 0.3s ease;
+        }
+        .calculator .row-1 .cell:hover ,.calculator .row-2 .cell:hover,.calculator .equal,.calculator .row-extra .cell:hover{
+            background:red;
+            color:white;
+        }
+        .calculator .equal:hover{
+            background:rgb(245, 42, 42) !important;
+            color:white !important;
+        }
+        .calculator .num:hover{
+            background:orange;
+            color:white;
+        }
+        .calculator .output input{
+            min-height:150px;
+            box-shadow:4px 4px 15px rgba(0,0,0,0.5);
+            border-radius:5px;
+            border:none;
+        }
+        .calculator .cell{
+            box-shadow:4px 4px 15px rgba(0,0,0,0.5);
+        }
+      @media screen and (max-width:425px){
+        .calculator-container{
+            display:block;
+            padding:0 !important;
+            margin:0 !important;
+        }
+        .calculator{
+            height:100% !important;
+            margin:0 !important;
+            width:100% !important;
+        }
+      }
+/* /////////////////////footer styling */
+.footer{
+    background:#1d1d11;
+    color:white;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    column-gap:20px;
+    line-height:5px;
+    margin-top:5px;
+    height:100%;
+    justify-content:space-around;
+    align-items:center;
+    font-size:20px;
+ }
+ .footer .icons .fa-brands,.footer .fa-solid{
+    font-size:20px;
+    color:crimson;
+    margin:0 3px;
+    transition:all 0.3s ease;
+    scale:1;
+    background:white;
+    border-radius:25px;
+    text-align:center;
+    width:30px;
+    padding:5px 0;
+ }
+ .footer .icons .fa-brands:hover,.footer .fa-solid:hover{
+    color:white;
+    background:crimson;
+    box-shadow:0 0 5px 3px crimson;
+ }
+ .footer .ammar{
+    color:crimson;
+    cursor:pointer;
+ }
+ .footer .ammar:hover{
+    text-decoration:underline;
+ }
+ @media screen and (max-width:480px){
+    .footer .fa-solid,.footer .fa-brands{
+        margin-inline:5px;
+    }
+    .footer .icons .fa-solid,.footer .icons .fa-brands{
+        margin-top:-30px !important;
+        margin-bottom:8px;
+    }
+ }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <form action="" name="calc">
+            <div class="calculator">
+                <div class="output">
+                     <input type="text" class="screen" name="screen">
+                </div>
+                <div class="row-container">
+                 <div class="row row-1">
+                     <div class="cell clear" onclick="calc.screen.value = ''">AC</div>
+                     <div class="cell del">DEL</div>
+                    <div class="cell divide" onclick="calc.screen.value += '/'">/</div>
+                 </div>
+                 <div class="row row-2">
+                     <div class="cell plus" onclick="calc.screen.value += '+'">+</div>
+                     <div class="cell minus" onclick="calc.screen.value += '-'">-</div>
+                     <div class="cell multiply" onclick="calc.screen.value += '*'">x</div>
+                 </div>
+                 <div class="row row-extra">
+                    <div class="cell openbraces" onclick="calc.screen.value +='('">(</div>
+                    <div class="cell closebraces" onclick="calc.screen.value +=')'">)</div>
+                    <div class="cell modulus" onclick="calc.screen.value +='%'">%</div>
+                 </div>
+                 <div class="row row-3 numbers">
+                     <div class="cell num 7" onclick="calc.screen.value += '7'">7</div>
+                     <div class="cell num 8" onclick="calc.screen.value += '8'">8</div>
+                     <div class="cell num 9" onclick="calc.screen.value += '9'">9</div>
+                 </div>
+                 <div class="row row-4">
+                     <div class="cell num 4" onclick="calc.screen.value += '4'">4</div>
+                     <div class="cell num 5" onclick="calc.screen.value += '5'">5</div>
+                     <div class="cell num 6" onclick="calc.screen.value += '6'">6</div>
+                 </div>
+                 <div class="row row-5">
+                     <div class="cell num 1" onclick="calc.screen.value += '1'">1</div>
+                     <div class="cell num 2" onclick="calc.screen.value += '2'">2</div>
+                     <div class="cell num 3" onclick="calc.screen.value += '3'">3</div>
+                 </div>
+                 <div class="row row-6">
+                     <div class="cell num point" onclick="calc.screen.value += '.'">.</div>
+                     <div class="cell num zero" onclick="calc.screen.value += '0'">0</div>
+                     <div class="cell num equal">=</div>
+                 </div>
+                </div>
+             </div>
+        </form>
+    </div>
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+          <h6>Created By<span class="ammar"> Tarique</span>Developer | Copyright &copy; 2022<i class="fa-solid fa-arrow-right right-arrow"></i></h6>
+        </div>
+        <div class="icons">
+          <a href="https://wa.me/916394733422"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="tel:6394733422"><i class="fa-solid fa-phone"></i></a>
+        </div>
+      </footer>
+    <script>
+        const screen = document.querySelector('.screen');
+        const del = document.querySelector('.del');
+        const equal = document.querySelector('.num.equal');
+        del.onclick =()=>{
+            screen.value = screen.value.substring(0,screen.value.length - 1);
+        }
+        equal.onclick = ()=>{
+            screen.value = eval(screen.value);
+        }
+    </script>
+</body>
+</html>
